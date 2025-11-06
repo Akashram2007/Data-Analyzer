@@ -1,7 +1,0 @@
-streamlit
-pandas
-matplotlib.pyplot
-seaborn
-time
-io
-BytesIO
