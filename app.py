@@ -5,27 +5,14 @@ import seaborn as sns
 import time
 from io import BytesIO
 
-page_bg = """
-<style>
-[data-testid="stAppViewContainer"]{
-   background-color:black;
-   color:white;
-}
-[data-testid="stSidebar"]{
-   background-color:black;
-   color:white;
-   border-right:4px grey solid;}
-</style>
-"""
-st.markdown(page_bg,unsafe_allow_html=True)
 st.set_page_config(page_title="Data Analyzer")
-st.sidebar.title("Data Analysis")
+st.sidebar.title("Data Analyzer")
 file = st.sidebar.file_uploader("Upload File",type=["csv","xlsx"])
 if file == None:
     st.title("Data Analyzer")
     st.header("Analyze, Clean, and Visualize Your Data in Seconds")
     st.subheader("Start Exploring Your Data Now!!")
-    st.title("🔍📊📈")
+    st.title("🔍📈🧹📊")
 st.sidebar.title("Data Analyzer")
 menu = st.sidebar.radio("Sections :",options=
 ["Data Preview","Data Summary","Missing Data/Cleaning","Visualization"])
@@ -45,7 +32,7 @@ if file is not None:
     #============================DATA PREVIEW============================
 
     if menu == "Data Preview":
-         st.title("Data Preview")
+         st.title(f"{menu}🔍")
          st.success("File Uploaded Sucessfully!")
          st.write("### File Name :",file.name)
          st.write("##### File Preview :")
@@ -57,7 +44,7 @@ if file is not None:
 
     if menu == "Data Summary":
       
-      st.title("Data Summary")
+      st.title(f"{menu}📈")
       st.write("Dataset Size :",data.size)
       st.write("Number of Rows :",data.shape[0])
       st.write("Number of Columns :",data.shape[1])
@@ -84,7 +71,7 @@ if file is not None:
 
     if menu == "Missing Data/Cleaning":
        
-       st.title("Missing Data/Cleaning")
+       st.title(f"{menu}🧹")
 
        st.write("##### Missing Values :")
        missing_count = pd.DataFrame({"Columns":data.columns,
@@ -131,7 +118,7 @@ if file is not None:
             
      #============================VISUALIZATION============================
     if menu == "Visualization":
-      st.title("Data Visualization")
+      st.title(f"{menu}📊")
       type = st.selectbox("file Mode",["Original","Drop Null Values","Fill Null Values"],width=300) 
       if type == "Original":
          data = data 
@@ -179,7 +166,11 @@ if file is not None:
 
         with st.spinner("Visualizing Your Data..."):
           time.sleep(0.5)
+          plt.style.use("default")
           chart = st.pyplot(fig,width=500)
           buf = BytesIO()
           fig.savefig(buf, format="png")
           st.download_button("Download Chart",data = buf.getvalue(),mime="image/png",file_name="chart.png")
+
+else:
+   st.error("Upload your File")
