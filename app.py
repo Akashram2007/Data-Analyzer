@@ -7,12 +7,12 @@ from io import BytesIO
 
 st.set_page_config(page_title="Data Analyzer",page_icon="🔍")
 st.sidebar.title("Data Analyzer")
-file = st.sidebar.file_uploader("Upload File",type=["csv","xlsx"])
-if file == None:
-    st.title("Data Analyzer")
-    st.header("Analyze, Clean, and Visualize Your Data in Seconds")
-    st.subheader("Start Exploring Your Data Now!!")
-    st.title("🔍📈🧹📊")
+file = st.file_uploader("Upload File",type=["csv","xlsx"],width=400)
+# if file == None:
+    # st.title("Data Analyzer")
+    # st.header("Analyze, Clean, and Visualize Your Data in Seconds")
+    # st.subheader("Start Exploring Your Data Now!!")
+    # st.title("🔍📈🧹📊")
 st.sidebar.title("Data Analyzer")
 menu = st.sidebar.radio("Sections :",options=
 ["Data Preview","Data Summary","Missing Data/Cleaning","Visualization"])
@@ -94,7 +94,7 @@ if file is not None:
        st.header("Cleaning Process")
 
        if st.button("Drop Missing Data"):
-           st.warning("Dropping Too Many rows may reduce data quality")
+           st.warning("Warning : Dropping Too Many rows may reduce data quality")
            data.dropna(axis=0,inplace=True)
            st.success("Missing values are Removed Sucessfully")
            st.write("Cleaned Dataset :")
@@ -173,4 +173,9 @@ if file is not None:
           st.download_button("Download Chart",data = buf.getvalue(),mime="image/png",file_name="chart.png")
 
 else:
-   st.error("Upload your File")
+  st.title("Data Analyzer")
+  st.header("Analyze, Clean, and Visualize Your Data in Seconds")
+  st.subheader("Start Exploring Your Data Now!!")
+  st.title("🔍📈🧹📊")
+  st.error("Upload your File")
+  
