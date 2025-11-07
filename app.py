@@ -7,7 +7,7 @@ from io import BytesIO
 
 st.set_page_config(page_title="Data Analyzer",page_icon="🔍")
 st.sidebar.title("Data Analyzer")
-file = st.sidebar.file_uploader("Upload File",type=["csv","xlsx"],width=400)
+file = st.file_uploader("Upload File",type=["csv","xlsx"],width=400)
 menu = st.sidebar.radio("Sections :",options=
 ["Data Preview","Data Summary","Missing Data/Cleaning","Visualization"])
 
