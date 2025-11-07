@@ -5,7 +5,7 @@ import seaborn as sns
 import time
 from io import BytesIO
 
-st.set_page_config(page_title="Data Analyzer")
+st.set_page_config(page_title="Data Analyzer",page_icon="🔍")
 st.sidebar.title("Data Analyzer")
 file = st.sidebar.file_uploader("Upload File",type=["csv","xlsx"])
 if file == None:
