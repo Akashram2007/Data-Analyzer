@@ -50,7 +50,7 @@ Here’s a look at the **Data Analyzer** interface 👇
 
 | Data Preview | Data Summary | Visualization |
 |---------------|---------------|----------------|
-| ![Data Preview Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Data%20Preview.png) | ![Data Summary Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Data%20Summary.png) | ![Visualization Screenshot](https://github.com/Akashram2007/Data-Analyzer/Data_Visualization.png) |
+| ![Data Preview Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Data%20Preview.png) | ![Data Summary Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Data%20Summary.png) | ![Visualization Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Data%20Visualization.png) |
 
 ---
 
