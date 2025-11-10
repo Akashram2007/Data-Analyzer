@@ -84,9 +84,9 @@ Data-Analyzer/
 ├── app.py
 ├── requirements.txt
 ├── README.md
-├── Screenshot 2025-11-10 171323.png
-├── Screenshot 2025-11-10 171947.png
-└── Screenshot 2025-11-10 172038.png
+├── Data Preview.png
+├── Data Summary.png
+└── Data Visualization.png
 ```
 
 ---
