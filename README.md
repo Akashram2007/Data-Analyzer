@@ -10,20 +10,20 @@
 
 ### 🧠 Overview
 
-**Data Analyzer** is an interactive web app built with **Streamlit** that lets users upload CSV datasets, explore insights, visualize patterns, and download cleaned data — all in a smooth and user-friendly interface.
+**Data Analyzer** is an interactive web app built with **Streamlit** that lets users upload CSV datasets, explore insights, visualize patterns, and download cleaned data — all in one place.
 
-🎯 Ideal for students, data beginners, and analysts who want quick insights without coding!
+🎯 Ideal for students, data beginners, and analysts who want quick insights without writing a single line of code!
 
 ---
 
 ## 🚀 Features
 
-✨ Upload CSV files instantly  
-✨ Automatic data summary (rows, columns, datatypes, missing values)  
-✨ Handle missing data (drop or fill)  
-✨ Visualize using Line, Bar, Scatter, Histogram, and Heatmap  
-✨ Generate correlation and descriptive statistics  
-✨ Download processed data  
+✅ Upload CSV files easily  
+✅ View dataset summary (rows, columns, datatypes, and missing values)  
+✅ Clean missing data (drop or fill)  
+✅ Generate visualizations (line, bar, scatter, histogram, heatmap, etc.)  
+✅ Correlation and statistical insights  
+✅ Download cleaned or analyzed dataset  
 
 ---
 
@@ -46,11 +46,13 @@
 
 ## 🖼️ Preview
 
-*(You can add an image named `preview.png` in your repo to show here)*  
+Here’s a look at the **Data Analyzer** interface 👇  
 
-```markdown
-![App Screenshot](preview.png)
-```
+| Data Preview | Data Summary | Visualization |
+|---------------|---------------|----------------|
+| ![Data Preview Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Screenshot%202025-11-10%20171323.png) | ![Data Summary Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Screenshot%202025-11-10%20171947.png) | ![Visualization Screenshot](https://github.com/Akashram2007/Data-Analyzer/blob/main/Screenshot%202025-11-10%20172038.png) |
+
+*(Make sure you upload these images into your repository so the links display correctly.)*
 
 ---
 
@@ -82,7 +84,9 @@ Data-Analyzer/
 ├── app.py
 ├── requirements.txt
 ├── README.md
-└── data/ (optional)
+├── Screenshot 2025-11-10 171323.png
+├── Screenshot 2025-11-10 171947.png
+└── Screenshot 2025-11-10 172038.png
 ```
 
 ---
@@ -108,4 +112,3 @@ Data-Analyzer/
 ## ⭐ Support
 
 If you find this project useful, don’t forget to give it a **⭐ star** on GitHub — it helps a lot!
-
