@@ -93,15 +93,14 @@ Data-Analyzer/
 
 🚧 Add user authentication  
 🚧 Include advanced visualizations (boxplots, pairplots, etc.)  
-🚧 Add machine learning insights  
-🚧 Improve UI with custom themes  
+🚧 Add machine learning insights    
 
 ---
 
 ## 🧑‍💻 Author
 
 **Akash R**  
-📧 [akashram2007@gmail.com](mailto:akashgram0103@gmail.com)  
+📧 [akashgram0103@gmail.com](mailto:akashgram0103@gmail.com)  
 🔗 [LinkedIn](https://www.linkedin.com/in/akash137)  
 🔗 [GitHub](https://github.com/Akashram2007)
 
