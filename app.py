@@ -143,7 +143,8 @@ if file is not None:
         else:
             x = st.selectbox("X axis", columns, width=300)
             plt.xlabel(x)
-            y = st.selectbox("Y axis",columns,width=300,key="y") plt.ylabel(y) 
+            y = st.selectbox("Y axis",columns,width=300,key="y") 
+            plt.ylabel(y) 
             color = st.color_picker("Graph colour",width=300,value="#1DBOD6")
         #----------------------------SCATTER PLOT----------------------------
         if plot == "Scatter":
