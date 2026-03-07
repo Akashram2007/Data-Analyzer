@@ -137,12 +137,14 @@ if file is not None:
            st.header(f"{plot} Plot :")
            x = st.selectbox("X axis", columns, width=300)
            plt.xlabel(x)
-           bins = int(st.number_input("Enter no of Bins",max_value=20,value=6,width=300)) color = st.color_picker("Graph colour", width=300, value= "#1DBOD6") 
+           bins = int(st.number_input("Enter no of Bins",max_value=20,value=6,width=300)) 
+           color = st.color_picker("Graph colour", width=300, value= "#1DBOD6") 
            sns.histplot(data[x],bins=bins,color=color)
         else:
             x = st.selectbox("X axis", columns, width=300)
             plt.xlabel(x)
-            y = st.selectbox("Y axis",columns,width=300,key="y") plt.ylabel(y) color = st.color_picker("Graph colour",width=300,value="#1DBOD6")
+            y = st.selectbox("Y axis",columns,width=300,key="y") plt.ylabel(y) 
+            color = st.color_picker("Graph colour",width=300,value="#1DBOD6")
         #----------------------------SCATTER PLOT----------------------------
         if plot == "Scatter":
           sns.scatterplot(data=data,x=data[x],y=data[y],color=color)
