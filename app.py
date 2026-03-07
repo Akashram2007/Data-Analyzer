@@ -133,7 +133,7 @@ if file is not None:
           sns.heatmap(corr,annot=True,cmap="coolwarm")
 
         #----------------------------HISTOGRAM PLOT----------------------------
-       elif plot == "Histogram":
+        elif plot == "Histogram":
            st.header(f"{plot} Plot :")
            numeric_columns = data.select_dtypes(include=["number"]).columns.tolist()
            if len(numeric_columns) == 0:
