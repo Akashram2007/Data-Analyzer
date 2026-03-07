@@ -125,7 +125,7 @@ if file is not None:
       plot = st.selectbox("Select PLot Type",["none","Scatter","Line","Bar","Histogram","Heat map"],width=300)
       columns = data.columns.to_list()
       if plot != "none":
-        fig, a = plt.subplots()
+        fig, a = plt.subplots( figsize = (16,8))
         #----------------------------HEAT MAP----------------------------
         if plot == "Heat map":
           st.header("Heat Map")
@@ -157,11 +157,14 @@ if file is not None:
         #----------------------------BAR PLOT----------------------------
         if plot == "Bar":
           sns.barplot(data=data,x=x,y=y,color=color)
+          
 
         with st.spinner("Visualizing Your Data..."):
           time.sleep(0.5)
           plt.style.use("default")
-          chart = st.pyplot(fig,width=500)
+          plt.xticks(rotation = 45, ha = "right")
+          plt.tight_layout()
+          chart = st.pyplot(fig, use_container_width=True)
           buf = BytesIO()
           fig.savefig(buf, format="png")
           st.download_button("Download Chart",data = buf.getvalue(),mime="image/png",file_name="chart.png")
