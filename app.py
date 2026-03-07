@@ -133,19 +133,17 @@ if file is not None:
           sns.heatmap(corr,annot=True,cmap="coolwarm")
 
         #----------------------------HISTOGRAM PLOT----------------------------
-        elif plot == "Histogram":
-          st.header(f"{plot} Plot :")
-          x = st.selectbox("X axis",columns,width=300)
-          plt.xlabel(x)
-          bins = int(st.number_input("Enter no of Bins",max_value=20,value=6,width=300))
-          color = st.color_picker("Graph colour",width=300,value="#1DB0D6")
-          sns.histplot(data[x],bins=bins,color=color)
-        else:
-          x = st.selectbox("X axis",columns,width=300)
-          plt.xlabel(x)
-          y = st.selectbox("Y axis",columns,width=300,key="y")   
-          plt.ylabel(y)
-          color = st.color_picker("Graph colour",width=300,value="#1DB0D6")
+       elif plot == "Histogram":
+           st.header(f"{plot} Plot :")
+           numeric_columns = data.select_dtypes(include=["number"]).columns.tolist()
+           if len(numeric_columns) == 0:
+               st.error("No numeric columns available for histogram")
+           else:
+               x = st.selectbox("X axis", numeric_columns, width=300)
+               plt.xlabel(x)
+               bins = int(st.number_input("Enter no of Bins", max_value=20, value=6, width=300))
+               color = st.color_picker("Graph colour", width=300, value="#1DB0D6")
+               sns.histplot(data[x], bins=bins, color=color)
         #----------------------------SCATTER PLOT----------------------------
         if plot == "Scatter":
           sns.scatterplot(data=data,x=data[x],y=data[y],color=color)
