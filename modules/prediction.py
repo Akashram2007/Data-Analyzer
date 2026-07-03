@@ -127,7 +127,7 @@ def prediction(data):
 
     st.subheader("📊 Model Performance")
     st.dataframe(score_df, use_container_width=True)
-    st.bar_chart(score_df.set_index("Model"))
+    st.bar_chart(score_df.set_index("Model"), horizontal = True, width = 300, height = 150)
 
     if problem_type == "Regression":
         r2, mae, rmse = st.session_state["metrics"][best_model]
