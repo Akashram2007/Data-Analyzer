@@ -21,7 +21,7 @@ def prediction(data):
 
     data = data.dropna().copy()
 
-    st.header("📈 Data Prediction")
+    st.header("Data Prediction")
 
     target = st.selectbox("Select Target Column", data.columns, width=300)
 
