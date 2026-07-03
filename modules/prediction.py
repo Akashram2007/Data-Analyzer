@@ -63,10 +63,6 @@ def prediction(data):
         X, y, test_size=0.2, random_state=42
     )
 
-    c1, c2 = st.columns(2)
-    c1.metric("Training Samples", len(X_train))
-    c2.metric("Testing Samples", len(X_test))
-
     if problem_type == "Regression":
         models = {
             "Linear Regression": LinearRegression(),
