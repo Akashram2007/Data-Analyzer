@@ -1,4 +1,4 @@
-# 📊 Data Analyzer
+# 📊 AI Datalyze
 
 [![Python](https://img.shields.io/badge/Made%20with-Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Framework-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
@@ -10,7 +10,7 @@
 
 ### 🧠 Overview
 
-**Data Analyzer** is an interactive web app built with **Streamlit** that lets users upload CSV datasets, explore insights, visualize patterns, and download cleaned data — all in one place.
+**AI Datalyze** is an interactive web app built with **Streamlit** that lets users upload CSV datasets, explore insights, visualize patterns, and download cleaned data — all in one place.
 
 🎯 Ideal for students, data beginners, and analysts who want quick insights without writing a single line of code!
 
@@ -40,13 +40,13 @@
 
 ## 🌐 Live Demo
 
-🎯 **Try it now:** [Data Analyzer App](https://data-analyzer-137.streamlit.app)
+🎯 **Try it now:** [AI Datalyze App](https://ai-datalyze.streamlit.app)
 
 ---
 
 ## 🖼️ Preview
 
-Here’s a look at the **Data Analyzer** interface 👇  
+Here’s a look at the **AI Datalyze** interface 👇  
 
 | Data Preview | Data Summary | Visualization |
 |---------------|---------------|----------------|
