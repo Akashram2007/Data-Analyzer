@@ -1,4 +1,3 @@
-# Improved prediction.py
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -17,11 +16,12 @@ from sklearn.metrics import (
     mean_squared_error,
 )
 
+
 def prediction(data):
 
     data = data.dropna().copy()
 
-    st.header("🚀 Data Prediction")
+    st.header("📈 Data Prediction")
 
     target = st.selectbox("Select Target Column", data.columns, width=300)
 
@@ -45,9 +45,9 @@ def prediction(data):
         encoders[col] = le
 
     if y.dtype == "object":
-        y_encoder = LabelEncoder()
-        y = y_encoder.fit_transform(y.astype(str))
-        st.session_state["target_encoder"] = y_encoder
+        target_encoder = LabelEncoder()
+        y = target_encoder.fit_transform(y.astype(str))
+        st.session_state["target_encoder"] = target_encoder
 
     st.session_state["encoders"] = encoders
 
@@ -59,10 +59,12 @@ def prediction(data):
 
     st.info(f"Detected Problem Type: {problem_type}")
 
-    c1, c2, c3 = st.columns(3)
+    st.subheader("📋 Dataset Information")
+    c1, c2, c3, c4 = st.columns(4)
     c1.metric("Rows", len(data))
-    c2.metric("Features", len(features))
-    c3.metric("Target", target)
+    c2.metric("Columns", len(data.columns))
+    c3.metric("Features", len(features))
+    c4.metric("Target", target)
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
@@ -102,13 +104,10 @@ def prediction(data):
                 r2 = r2_score(y_test, pred)
                 mae = mean_absolute_error(y_test, pred)
                 rmse = np.sqrt(mean_squared_error(y_test, pred))
-
                 scores[name] = r2
                 metrics[name] = (r2, mae, rmse)
-
             else:
-                acc = accuracy_score(y_test, pred)
-                scores[name] = acc
+                scores[name] = accuracy_score(y_test, pred)
 
         best_name = max(scores, key=scores.get)
 
@@ -121,89 +120,72 @@ def prediction(data):
         st.session_state["cat_cols"] = list(encoders.keys())
         st.session_state["metrics"] = metrics
 
-    if st.session_state.get("trained", False):
+    if not st.session_state.get("trained", False):
+        return
 
-        problem_type = st.session_state["problem"]
-        scores = st.session_state["scores"]
+    problem_type = st.session_state["problem"]
+    scores = st.session_state["scores"]
+    best_model = st.session_state["best_name"]
+    model = st.session_state["model"]
 
-        metric_name = "R² Score" if problem_type == "Regression" else "Accuracy (%)"
+    metric_name = "R² Score" if problem_type == "Regression" else "Accuracy (%)"
+    values = list(scores.values()) if problem_type == "Regression" else [v * 100 for v in scores.values()]
 
-        values = (
-            list(scores.values())
-            if problem_type == "Regression"
-            else [v * 100 for v in scores.values()]
-        )
+    score_df = pd.DataFrame({
+        "Model": list(scores.keys()),
+        metric_name: values,
+    })
 
-        score_df = pd.DataFrame(
-            {
-                "Model": list(scores.keys()),
-                metric_name: values,
-            }
-        )
+    st.subheader("📊 Model Performance")
+    st.dataframe(score_df, use_container_width=True)
+    st.bar_chart(score_df.set_index("Model"))
 
-        st.subheader("📊 Model Performance")
-        st.dataframe(score_df, use_container_width=True)
-        st.bar_chart(score_df.set_index("Model"))
+    if problem_type == "Regression":
+        r2, mae, rmse = st.session_state["metrics"][best_model]
+        st.success(f"🏆 Best Model: {best_model}")
+        a, b, c = st.columns(3)
+        a.metric("R² Score", f"{r2:.3f}")
+        b.metric("MAE", f"{mae:.2f}")
+        c.metric("RMSE", f"{rmse:.2f}")
+    else:
+        st.success(f"🏆 Best Model: {best_model}")
+        st.metric("Accuracy", f"{scores[best_model]*100:.2f}%")
 
-        best_model = st.session_state["best_name"]
+    if hasattr(model, "feature_importances_"):
+        imp = pd.DataFrame({
+            "Feature": st.session_state["features"],
+            "Importance": model.feature_importances_,
+        }).sort_values("Importance", ascending=False)
+
+        st.subheader("⭐ Feature Importance")
+        st.bar_chart(imp.set_index("Feature"))
+
+    st.divider()
+    st.subheader("🔮 Prediction")
+
+    inputs = []
+
+    for col in st.session_state["features"]:
+        if col in st.session_state["cat_cols"]:
+            le = st.session_state["encoders"][col]
+            val = st.selectbox(col, list(le.classes_), width=300)
+            inputs.append(le.transform([val])[0])
+        else:
+            inputs.append(st.number_input(col, width=300))
+
+    if st.button("Predict"):
+        result = model.predict([inputs])[0]
+
+        if problem_type == "Classification" and "target_encoder" in st.session_state:
+            result = st.session_state["target_encoder"].inverse_transform([int(result)])[0]
+
+        st.success("Prediction Completed Successfully!")
+        st.subheader("🎯 Prediction Result")
 
         if problem_type == "Regression":
-            r2, mae, rmse = st.session_state["metrics"][best_model]
-
-            st.success(f"🏆 Best Model: {best_model}")
-
-            c1, c2, c3 = st.columns(3)
-            c1.metric("R²", f"{r2:.3f}")
-            c2.metric("MAE", f"{mae:.2f}")
-            c3.metric("RMSE", f"{rmse:.2f}")
-
+            st.metric(f"Predicted {target}", f"{float(result):.2f}")
         else:
-            st.success(
-                f"🏆 Best Model: {best_model}\n\nAccuracy: {scores[best_model]*100:.2f}%"
-            )
-
-        st.divider()
-        st.subheader("🔮 Prediction")
-
-        model = st.session_state["model"]
-
-        inputs = []
-
-        for col in st.session_state["features"]:
-
-            if col in st.session_state["cat_cols"]:
-
-                le = st.session_state["encoders"][col]
-
-                value = st.selectbox(col, list(le.classes_))
-                inputs.append(le.transform([value])[0])
-
-            else:
-
-                inputs.append(st.number_input(col))
-
-        if st.button("Predict"):
-
-            result = model.predict([inputs])[0]
-
-            if problem_type == "Classification" and "target_encoder" in st.session_state:
-                result = st.session_state["target_encoder"].inverse_transform([int(result)])[0]
-
-            st.subheader("🎯 Prediction Result")
-
-            st.metric(target, result if problem_type=="Classification" else f"{float(result):.2f}")
-
+            st.metric(f"Predicted {target}", str(result))
             if hasattr(model, "predict_proba"):
-                confidence = model.predict_proba([inputs]).max()*100
-                st.info(f"Confidence : {confidence:.2f}%")
-
-            if hasattr(model, "feature_importances_"):
-                imp = pd.DataFrame(
-                    {
-                        "Feature": st.session_state["features"],
-                        "Importance": model.feature_importances_,
-                    }
-                ).sort_values("Importance", ascending=False)
-
-                st.subheader("⭐ Feature Importance")
-                st.bar_chart(imp.set_index("Feature"))
+                conf = model.predict_proba([inputs]).max() * 100
+                st.info(f"Confidence: {conf:.2f}%")
