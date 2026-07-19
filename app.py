@@ -25,11 +25,22 @@ menu = st.sidebar.radio(
 if file is not None:
     file_type = file.name.split(".")[-1]
     if file_type == "csv":
-        data = pd.read_csv(file)
+        try:
+            data = pd.read_csv(file)
+        except UnicodeDecodeError:
+            file.seek(0)
+            try:
+                data = pd.read_csv(file, encoding="latin1")
+            except UnicodeDecodeError:
+                file.seek(0)
+                data = pd.read_csv(file, encoding="cp1252")
+    
     elif file_type == "xlsx":
         data = pd.read_excel(file, engine="openpyxl")
+    
     else:
         st.error("Unsupported File Type")
+        st.stop()
 
     data.index = range(1, len(data) + 1)
     data.index.name = "S.No"
