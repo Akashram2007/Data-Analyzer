@@ -38,7 +38,7 @@ if file is not None:
     elif file_type == "xlsx":
         data = pd.read_excel(file, engine="openpyxl")
     elif file_type == "xls":
-        data = pd.read_excel(file)
+        data = pd.read_excel(file, engine="xlrd")
     else:
         st.error("Unsupported File Type")
         st.stop()
