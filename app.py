@@ -35,9 +35,10 @@ if file is not None:
                 file.seek(0)
                 data = pd.read_csv(file, encoding="cp1252")
     
-    elif file_type in ["xlsx", "xls"]:
+    elif file_type == "xlsx":
         data = pd.read_excel(file, engine="openpyxl")
-    
+    elif file_type == "xls":
+        data = pd.read_excel(file)
     else:
         st.error("Unsupported File Type")
         st.stop()
